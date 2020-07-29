@@ -14,19 +14,22 @@ if ENV['HIPSPEC_WEBHOOK'].nil?
   puts 'Please Configure webhook: https://docs.hipspec.com'
 else
   puts 'Post To HipSpec Webhook'
-  # Posts data to HIPSPEC_WEBHOOK
-  uri = URI.parse(ENV['HIPSPEC_WEBHOOK'])
-  header = { 'Content-Type': 'text/json' }
+  uri = URI(ENV['HIPSPEC_WEBHOOK'])
+  req = Net::HTTP::Post.new(uri, {
+                              'Content-Type': 'application/json'
+                            })
 
-  http = Net::HTTP.new(uri.host, uri.port)
-  request = Net::HTTP::Post.new(uri.request_uri, header)
-  request.body = {
-    GITHUB_REPO: ENV['GITHUB_REPOSITORY'],
-    GITHUB_SHA: ENV['GITHUB_SHA'],
-    scan_data: data
-  }
+  req.body = {
+    "GITHUB_REPO": ENV['GITHUB_REPOSITORY'],
+    "GITHUB_SHA": ENV['GITHUB_SHA'],
+    "scan_data": data
+  }.to_json
+
+  Net::HTTP.start(uri.hostname, uri.port, use_ssl: uri.scheme == 'https') do |http|
+    response = http.request(req)
+    puts response.read_body
+  end
 end
 # Send the request
-response = http.request(request)
 
 puts 'Closing...'
