@@ -1,6 +1,6 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'HipSpec Scan'
+description: "HipSpec Repo Scanner for Tracking ID\'s"
 inputs:
   who-to-greet:  # id of input
     description: 'Who to greet'
