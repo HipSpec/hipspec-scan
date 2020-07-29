@@ -1,8 +1,8 @@
 require 'json'
 require 'git'
 
-puts "GITHUB_REPO: #{env.GITHUB_REPOSITORY}"
-puts "GITHUB_SHA: #{env.GITHUB_SHA}"
+puts "GITHUB_REPO: #{ENV['GITHUB_REPOSITORY']}"
+puts "GITHUB_SHA: #{ENV['GITHUB_SHA']}"
 
 g = Git.open('../')
 data = g.grep('HIPSPEC').to_json
