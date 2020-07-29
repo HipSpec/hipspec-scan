@@ -10,7 +10,9 @@ data = g.grep('HIPSPEC').to_json
 puts 'Writing scan to output file: hipspec-data.json'
 File.write('./hipspec-data.json', data)
 
-if ENV['HIPSPEC_WEBHOOK'].present?
+if ENV['HIPSPEC_WEBHOOK'].nil?
+  puts 'Please Configure webhook: https://docs.hipspec.com'
+else
   puts 'Post To HipSpec Webhook'
   # Posts data to HIPSPEC_WEBHOOK
   uri = URI.parse(ENV['HIPSPEC_WEBHOOK'])
@@ -23,8 +25,6 @@ if ENV['HIPSPEC_WEBHOOK'].present?
     GITHUB_SHA: ENV['GITHUB_SHA'],
     scan_data: data
   }
-else
-  puts 'Please Configure webhook: https://docs.hipspec.com'
 end
 # Send the request
 response = http.request(request)
