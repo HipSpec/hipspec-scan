@@ -3,7 +3,9 @@
 echo "GITHUB_REPO: $GITHUB_REPOSITORY"
 echo "GITHUB_SHA: $GITHUB_SHA"
 
-ruby ./repo-scan.rb
+ls -la
+
+ruby /repo-scan.rb
 
 cat hipspec-data.json
 
