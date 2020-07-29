@@ -1,6 +1,7 @@
 # Container image that runs your code
 FROM ruby:2.7-slim
 
+RUN apt-get update 
 RUN apt-get install -y --no-install-recommends git
 
 RUN sudo gem install git
