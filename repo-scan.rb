@@ -2,11 +2,21 @@ require 'json'
 require 'git'
 require 'net/http'
 
-puts "GITHUB_REPO: #{ENV['GITHUB_REPOSITORY']}"
-puts "GITHUB_SHA: #{ENV['GITHUB_SHA']}"
+git_server_url = ENV['GITHUB_SERVER_URL'] || 'not_provided'
+git_repo = ENV['GITHUB_REPOSITORY'] || 'not_provided'
+git_sha = ENV['GITHUB_SHA'] || 'not_provided'
+webhook_target = ENV['HIPSPEC_WEBHOOK']
+
+puts "GITHUB_SERVER_URL: #{git_server_url}"
+puts "GITHUB_REPO: #{git_repo}"
+puts "GITHUB_SHA: #{git_sha}"
 
 g = Git.open('./')
-data = g.grep('HIPSPEC').to_json
+data = g.grep('HIPSPEC-')
+
+data = data.map { |k, v| { name: k, locations: v.to_a } }
+data = data.to_json
+
 puts 'Writing scan to output file: hipspec-data.json'
 File.write('./hipspec-data.json', data)
 
@@ -20,8 +30,9 @@ else
                             })
 
   req.body = {
-    "GITHUB_REPO": ENV['GITHUB_REPOSITORY'],
-    "GITHUB_SHA": ENV['GITHUB_SHA'],
+    "server_url": git_server_url,
+    "repo": git_repo,
+    "sha": git_sha,
     "scan_data": data
   }.to_json
 
@@ -30,6 +41,6 @@ else
     puts response.read_body
   end
 end
-# Send the request
+# End Send the request
 
 puts 'Closing...'

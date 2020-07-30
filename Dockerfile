@@ -2,6 +2,7 @@
 # HIPSPEC-SAMPLE-3
 
 FROM ruby:2.7-slim
+# HIPSPEC-SAMPLE-4
 
 RUN apt-get update 
 RUN apt-get install -y --no-install-recommends git
