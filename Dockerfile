@@ -1,4 +1,6 @@
 # Container image that runs your code
+# HIPSPEC-SAMPLE-3
+
 FROM ruby:2.7-slim
 
 RUN apt-get update 
