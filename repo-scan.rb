@@ -2,9 +2,11 @@ require 'json'
 require 'git'
 require 'net/http'
 
-git_server_url = ENV['GITHUB_SERVER_URL'] || 'not_provided'
-git_repo = ENV['GITHUB_REPOSITORY'] || 'not_provided'
-git_sha = ENV['GITHUB_SHA'] || 'not_provided'
+git_server_url = ENV['GITHUB_SERVER_URL'] || 'not_provided' # Example: https://github.com
+git_repo = ENV['GITHUB_REPOSITORY'] || 'not_provided' # Example: octocat/Hello-World
+git_sha = ENV['GITHUB_SHA'] || 'not_provided' # Example: ffac537e6cbbf934b08745a378932722df287a53
+git_ref = ENV['GITHUB_REF'] || 'not_provided' # Example: refs/heads/feature-branch-1 or tag
+
 webhook_target = ENV['HIPSPEC_WEBHOOK']
 
 puts "GITHUB_SERVER_URL: #{git_server_url}"
@@ -23,7 +25,7 @@ File.write('./hipspec-data.json', data)
 if ENV['HIPSPEC_WEBHOOK'].nil?
   puts 'Please Configure webhook: https://docs.hipspec.com'
 else
-  puts 'Post To HipSpec Webhook'
+  puts 'Post To HipSpec Webhook:'
   uri = URI(ENV['HIPSPEC_WEBHOOK'])
   req = Net::HTTP::Post.new(uri, {
                               'Content-Type': 'application/json'
@@ -33,6 +35,7 @@ else
     "server_url": git_server_url,
     "repo": git_repo,
     "sha": git_sha,
+    "git_ref": git_ref,
     "scan_data": data
   }.to_json
 
@@ -43,4 +46,4 @@ else
 end
 # End Send the request
 
-puts 'Closing...'
+puts 'Closing... Script, Returning to Pipeline'

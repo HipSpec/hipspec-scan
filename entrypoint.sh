@@ -7,7 +7,7 @@ ls -la
 
 ruby /repo-scan.rb
 
-cat hipspec-data.json
+# cat hipspec-data.json
 
 echo "Hello $1"
 time=$(date)
