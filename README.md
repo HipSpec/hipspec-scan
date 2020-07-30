@@ -5,9 +5,9 @@ This action scans for HIPSPEC identifiers unique to your team and pushes them to
 
 ## Example usage
 
-uses: actions/hello-world-docker-action@v1
-with:
-  who-to-greet: 'Mona the Octocat'
+```yaml
+uses: HipSpec/hipspec-scan@develop
+```
 
 
 # Example Identifiers you can add to your readme for webhook testing:
