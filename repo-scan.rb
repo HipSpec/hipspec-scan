@@ -16,7 +16,7 @@ puts "GITHUB_SHA: #{git_sha}"
 g = Git.open('./')
 data = g.grep('HIPSPEC-')
 
-data = data.map { |k, v| { name: k, locations: v.to_a } }
+data = data.map { |k, v| { location: k, identifiers: v.to_a } }
 data = data.to_json
 
 puts 'Writing scan to output file: hipspec-data.json'

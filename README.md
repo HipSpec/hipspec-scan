@@ -1,18 +1,7 @@
-# Hello world docker action
+# HipSpec docker action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+This action scans for HIPSPEC identifiers unique to your team and pushes them to your private webhook endpoint which feeds your organization's dashboard.
 
-## Inputs
-
-### `who-to-greet`
-
-**Required** The name of the person to greet. Default `"World"`.
-
-## Outputs
-
-### `time`
-
-The time we greeted you.
 
 ## Example usage
 
@@ -20,4 +9,8 @@ uses: actions/hello-world-docker-action@v1
 with:
   who-to-greet: 'Mona the Octocat'
 
-HIPSPEC-SAMPLE2
+
+# Example Identifiers you can add to your readme for webhook testing:
+
+- HIPSPEC-SAMPLE2
+- HIPSPEC-SAMPLE3
