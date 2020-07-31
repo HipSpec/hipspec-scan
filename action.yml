@@ -5,6 +5,8 @@ description: "HipSpec Repo Scanner for Tracking ID\'s"
 # Environment variables available to all jobs and steps in this workflow
 # env:
 #   HIPSPEC_WEBHOOK: ${{ secrets.HIPSPEC_WEBHOOK }}
+#   HIPSPEC_ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
+
 
 # inputs:
 #   who-to-greet:  # id of input

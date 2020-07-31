@@ -8,6 +8,7 @@ git_sha = ENV['GITHUB_SHA'] || 'not_provided' # Example: ffac537e6cbbf934b08745a
 git_ref = ENV['GITHUB_REF'] || 'not_provided' # Example: refs/heads/feature-branch-1 or tag
 
 webhook_target = ENV['HIPSPEC_WEBHOOK']
+uri = URI(webhook_target)
 
 puts "GITHUB_SERVER_URL: #{git_server_url}"
 puts "GITHUB_REPO: #{git_repo}"
@@ -22,11 +23,10 @@ data = data.to_json
 puts 'Writing scan to output file: hipspec-data.json'
 File.write('./hipspec-data.json', data)
 
-if ENV['HIPSPEC_WEBHOOK'].nil?
+if uri.nil?
   puts 'Please Configure webhook: https://docs.hipspec.com'
 else
   puts 'Post To HipSpec Webhook:'
-  uri = URI(ENV['HIPSPEC_WEBHOOK'])
   req = Net::HTTP::Post.new(uri, {
                               'Content-Type': 'application/json'
                             })
