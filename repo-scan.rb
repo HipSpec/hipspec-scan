@@ -6,12 +6,14 @@ git_server_url = ENV['GITHUB_SERVER_URL'] || 'not_provided' # Example: https://g
 git_repo = ENV['GITHUB_REPOSITORY'] || 'not_provided' # Example: octocat/Hello-World
 git_sha = ENV['GITHUB_SHA'] || 'not_provided' # Example: ffac537e6cbbf934b08745a378932722df287a53
 git_ref = ENV['GITHUB_REF'] || 'not_provided' # Example: refs/heads/feature-branch-1 or tag
+git_actor = ENV['GITHUB_actor'] || 'not_provided' # Example: octocat
 
 webhook_target = ENV['HIPSPEC_WEBHOOK']
 uri = URI(webhook_target)
 
 puts "GITHUB_SERVER_URL: #{git_server_url}"
 puts "GITHUB_REPO: #{git_repo}"
+puts "GITHUB_ACTOR: #{git_actor}"
 puts "GITHUB_SHA: #{git_sha}"
 
 g = Git.open('./')
@@ -36,6 +38,7 @@ else
     "repo": git_repo,
     "sha": git_sha,
     "git_ref": git_ref,
+    "git_actor": git_actor,
     "scan_data": data
   }.to_json
 
