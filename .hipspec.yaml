@@ -1,5 +1,8 @@
+---
 hipspec:
-  fyi: 'Github requires dirtying a banch before creating a merge request. HipSpec does that here.'
+  fyi: Github requires dirtying a banch before creating a merge request. HipSpec does
+    that here.
   offerings: {}
   offering_items:
-    - SAMPLE-1 # Feel free to remove this line
+  - SAMPLE-1
+  - F2B9XRZ
