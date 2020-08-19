@@ -1,2 +1,4 @@
-file content5
-F2B9XRZ: sample_url3
+hipspec:
+  offerings: {}
+  offering_items:
+    - SAMPLE-1 # Feel free to remove this line
