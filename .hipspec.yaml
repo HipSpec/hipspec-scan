@@ -1,0 +1,9 @@
+---
+hipspec:
+  fyi: Github requires dirtying a banch before creating a merge request. HipSpec does
+    that here.
+  offerings: {}
+  offering_items:
+  - SAMPLE-1
+  - F2B9XRZ
+  - F2B9XRZ
